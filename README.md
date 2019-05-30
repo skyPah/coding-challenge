@@ -13,7 +13,7 @@ The main challenge will be to build a simple user management tool that will perf
 about look of the application. There are no business rules & guidelines other than to show us what you’re truly made of. It can be as simple or as complex as you want it to be.
 
 ### Prerequisites
-There is none :) Our main solutions stack include but not limited to Kotlin, Java, AngularJS, Flutter, Spring...  
+There are none :) Our main solutions stack include but not limited to Kotlin, Java, AngularJS, Flutter, Spring...  
 Feel free to use any languages and technologies you are comfortable with.
 
 ## Mockups
