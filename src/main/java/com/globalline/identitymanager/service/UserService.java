@@ -5,10 +5,12 @@ import com.globalline.identitymanager.domain.Authority;
 import com.globalline.identitymanager.domain.User;
 import com.globalline.identitymanager.repository.AuthorityRepository;
 import com.globalline.identitymanager.repository.UserRepository;
+import com.globalline.identitymanager.repository.constant.UserConstant;
 import com.globalline.identitymanager.security.AuthoritiesConstants;
 import com.globalline.identitymanager.security.SecurityUtils;
 import com.globalline.identitymanager.service.dto.UserDTO;
 import io.github.jhipster.security.RandomUtil;
+import lombok.RequiredArgsConstructor;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -38,18 +41,6 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
-
-    public UserService(
-        UserRepository userRepository,
-        PasswordEncoder passwordEncoder,
-        AuthorityRepository authorityRepository,
-        CacheManager cacheManager
-    ) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.authorityRepository = authorityRepository;
-        this.cacheManager = cacheManager;
-    }
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -86,7 +77,7 @@ public class UserService {
     public Optional<User> requestPasswordReset(String mail) {
         return userRepository
             .findOneByEmailIgnoreCase(mail)
-            .filter(User::getActivated)
+            .filter(User::isActivated)
             .map(
                 user -> {
                     user.setResetKey(RandomUtil.generateResetKey());
@@ -144,7 +135,7 @@ public class UserService {
     }
 
     private boolean removeNonActivatedUser(User existingUser) {
-        if (existingUser.getActivated()) {
+        if (existingUser.isActivated()) {
             return false;
         }
         userRepository.delete(existingUser);
@@ -330,9 +321,9 @@ public class UserService {
     }
 
     private void clearUserCaches(User user) {
-        Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
+        Objects.requireNonNull(cacheManager.getCache(UserConstant.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
         if (user.getEmail() != null) {
-            Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
+            Objects.requireNonNull(cacheManager.getCache(UserConstant.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
     }
 }

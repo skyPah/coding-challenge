@@ -13,6 +13,7 @@ import com.globalline.identitymanager.web.rest.errors.LoginAlreadyUsedException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import lombok.RequiredArgsConstructor;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -57,6 +58,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class UserResource {
     private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
         Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
@@ -72,12 +74,6 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
-        this.userService = userService;
-        this.userRepository = userRepository;
-        this.mailService = mailService;
-    }
 
     /**
      * {@code POST  /users}  : Creates a new user.

@@ -14,6 +14,7 @@ import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.*;
+import static com.globalline.identitymanager.repository.constant.UserConstant.*;
 
 @Configuration
 @EnableCaching
@@ -40,8 +41,8 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            createCache(cm, com.globalline.identitymanager.repository.UserRepository.USERS_BY_LOGIN_CACHE);
-            createCache(cm, com.globalline.identitymanager.repository.UserRepository.USERS_BY_EMAIL_CACHE);
+            createCache(cm, USERS_BY_LOGIN_CACHE);
+            createCache(cm, USERS_BY_EMAIL_CACHE);
             createCache(cm, com.globalline.identitymanager.domain.User.class.getName());
             createCache(cm, com.globalline.identitymanager.domain.Authority.class.getName());
             createCache(cm, com.globalline.identitymanager.domain.User.class.getName() + ".authorities");
