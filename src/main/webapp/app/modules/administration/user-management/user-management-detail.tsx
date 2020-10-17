@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Badge } from 'reactstrap';
+import { Button, Row, Badge, Media } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -26,6 +26,12 @@ export const UserManagementDetail = (props: IUserManagementDetailProps) => {
       </h2>
       <Row size="md">
         <dl className="jh-entity-details">
+          <dt>
+            <Translate contentKey="userManagement.imageUrl">Profile Picture</Translate>
+          </dt>
+          <dd>
+            <Media object src={user.imageUrl} alt="Generic placeholder image" />
+          </dd>
           <dt>
             <Translate contentKey="userManagement.login">Login</Translate>
           </dt>

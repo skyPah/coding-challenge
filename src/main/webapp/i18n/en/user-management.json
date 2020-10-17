@@ -1,7 +1,7 @@
 {
   "userManagement": {
     "home": {
-      "title": "Users",
+      "title": "User Accounts",
       "createLabel": "Create a new user",
       "createOrEditLabel": "Create or edit a user"
     },
@@ -25,6 +25,7 @@
     "createdBy": "Created by",
     "createdDate": "Created date",
     "lastModifiedBy": "Modified by",
-    "lastModifiedDate": "Modified date"
+    "lastModifiedDate": "Modified date",
+    "imageUrl": "Profile Picture"
   }
 }

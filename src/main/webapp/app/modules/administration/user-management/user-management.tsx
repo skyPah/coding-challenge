@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Table, Row, Badge } from 'reactstrap';
+import { Button, Table, Row, Badge, Media } from 'reactstrap';
 import { Translate, TextFormat, JhiPagination, JhiItemCount, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -76,6 +76,9 @@ export const UserManagement = (props: IUserManagementProps) => {
               <Translate contentKey="global.field.id">ID</Translate>
               <FontAwesomeIcon icon="sort" />
             </th>
+            <th className="hand">
+              <Translate contentKey="userManagement.imageUrl">Picture</Translate>
+            </th>
             <th className="hand" onClick={sort('login')}>
               <Translate contentKey="userManagement.login">Login</Translate>
               <FontAwesomeIcon icon="sort" />
@@ -114,6 +117,9 @@ export const UserManagement = (props: IUserManagementProps) => {
                 <Button tag={Link} to={`${match.url}/${user.login}`} color="link" size="sm">
                   {user.id}
                 </Button>
+              </td>
+              <td>
+                <Media object src={user.imageUrl} style={{maxHeight: 100, maxWidth: 100}} alt="Generic placeholder image" />
               </td>
               <td>{user.login}</td>
               <td>{user.email}</td>
