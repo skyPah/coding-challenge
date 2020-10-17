@@ -69,6 +69,8 @@ npm install
 
 We use npm scripts and [Webpack][] as our build system.
 
+If you want to run the app locally, you will need to create a database named `identity-manager` in (http://localhost:5432) (PostgreSQL).
+
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
